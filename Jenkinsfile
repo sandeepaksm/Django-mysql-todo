@@ -22,13 +22,16 @@ pipeline {
         }
 
         stage('Run Tests') {
-            steps {
-                sh """
-                    docker-compose -f docker-compose.yml run --rm web python manage.py test
-                    docker-compose -f docker-compose.yml down -v
-                """
-            }
-        }
+    steps {
+        sh """
+            docker-compose -f docker-compose.yml up -d db
+            sleep 20
+            docker exec django-todo-pipeline01-db-1 mysql -uroot -prootpass -e "GRANT ALL PRIVILEGES ON *.* TO 'todouser'@'%'; FLUSH PRIVILEGES;"
+            docker-compose -f docker-compose.yml run --rm web python manage.py test
+            docker-compose -f docker-compose.yml down -v
+        """
+    }
+}
 
         stage('Run Migrations') {
             steps {

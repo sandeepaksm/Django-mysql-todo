@@ -21,6 +21,15 @@ pipeline {
             }
         }
 
+        stage('Run Tests') {
+            steps {
+                sh """
+                    docker-compose -f docker-compose.yml run --rm web python manage.py test
+                    docker-compose -f docker-compose.yml down -v
+                """
+            }
+        }
+
         stage('Run Migrations') {
             steps {
                 sh """
@@ -51,7 +60,7 @@ pipeline {
 
     post {
         always {
-            sh 'docker-compose down || true'
+            sh 'docker-compose down -v || true'
         }
     }
 }

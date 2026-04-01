@@ -5,6 +5,17 @@ pipeline {
         DOCKER_TAG = "${BUILD_NUMBER}"
     }
     stages {
+        stage('Check Commit') {
+            steps {
+                script {
+                    def commitMsg = sh(script: 'git log -1 --pretty=%B', returnStdout: true).trim()
+                    if (commitMsg.startsWith('Update image to version')) {
+                        currentBuild.result = 'ABORTED'
+                        error('Skipping build triggered by Jenkins manifest update')
+                    }
+                }
+            }
+        }
         stage('Checkout') {
             steps {
                 git branch: 'main',

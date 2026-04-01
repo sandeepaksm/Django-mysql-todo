@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = "your-dockerhub-username/django-todo"
+        DOCKER_IMAGE = "sandeep2862/django-todo"
         DOCKER_TAG = "${BUILD_NUMBER}"
     }
 
@@ -11,7 +11,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 git branch: 'main',
-                    url: 'https://github.com/saikksub/Django-mysql-todo.git'
+                    url: 'https://github.com/sandeepaksm/Django-mysql-todo.git'
             }
         }
 

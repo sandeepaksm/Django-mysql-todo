@@ -1,0 +1,16 @@
+{% extends "hello/base.html" %}
+{% block content %}
+<a href="{% url 'todo_list' %}" style="font-size:0.875rem;">&larr; Back to list</a>
+<h1 style="margin-top:1rem;">Delete Todo</h1>
+
+<div class="card" style="display:block;margin-top:1.25rem;">
+  <p>Are you sure you want to delete <strong>"{{ todo.title }}"</strong>? This cannot be undone.</p>
+  <div class="form-actions" style="margin-top:1rem;">
+    <form method="post">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-danger">Yes, delete</button>
+    </form>
+    <a href="{% url 'todo_list' %}" class="btn btn-ghost">Cancel</a>
+  </div>
+</div>
+{% endblock %}

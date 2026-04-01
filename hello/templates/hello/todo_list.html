@@ -1,0 +1,40 @@
+{% extends "hello/base.html" %}
+{% block content %}
+<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;">
+  <h1>My Todos</h1>
+  <a href="{% url 'todo_create' %}" class="btn btn-primary">+ New Todo</a>
+</div>
+
+{% if todos %}
+  {% for todo in todos %}
+  <div class="card {% if todo.completed %}done{% endif %}">
+    <div style="flex:1">
+      <div style="display:flex;align-items:center;gap:0.6rem;">
+        <span class="todo-title">{{ todo.title }}</span>
+        {% if todo.completed %}
+          <span class="badge badge-done">Done</span>
+        {% else %}
+          <span class="badge badge-pending">Pending</span>
+        {% endif %}
+      </div>
+      {% if todo.description %}
+        <p class="todo-desc">{{ todo.description }}</p>
+      {% endif %}
+      <p class="todo-meta">Created {{ todo.created_at|date:"M d, Y H:i" }}</p>
+    </div>
+    <div class="actions">
+      <form method="post" action="{% url 'todo_toggle' todo.pk %}">
+        {% csrf_token %}
+        <button type="submit" class="btn {% if todo.completed %}btn-ghost{% else %}btn-success{% endif %}">
+          {% if todo.completed %}Undo{% else %}Done{% endif %}
+        </button>
+      </form>
+      <a href="{% url 'todo_update' todo.pk %}" class="btn btn-warning">Edit</a>
+      <a href="{% url 'todo_delete' todo.pk %}" class="btn btn-danger">Delete</a>
+    </div>
+  </div>
+  {% endfor %}
+{% else %}
+  <p class="empty">No todos yet. <a href="{% url 'todo_create' %}">Create one!</a></p>
+{% endif %}
+{% endblock %}

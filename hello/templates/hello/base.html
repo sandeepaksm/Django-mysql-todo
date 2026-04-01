@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Todo App</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: system-ui, sans-serif; background: #f3f4f6; color: #111827; min-height: 100vh; }
+    .container { max-width: 720px; margin: 0 auto; padding: 2rem 1rem; }
+    h1 { font-size: 1.75rem; font-weight: 700; margin-bottom: 1.5rem; }
+    h2 { font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem; }
+    a { color: #2563eb; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .btn {
+      display: inline-block; padding: 0.4rem 0.9rem; border-radius: 6px;
+      font-size: 0.875rem; font-weight: 500; cursor: pointer; border: none;
+      transition: opacity 0.15s;
+    }
+    .btn:hover { opacity: 0.85; }
+    .btn-primary { background: #2563eb; color: #fff; }
+    .btn-success { background: #16a34a; color: #fff; }
+    .btn-warning { background: #d97706; color: #fff; }
+    .btn-danger  { background: #dc2626; color: #fff; }
+    .btn-ghost   { background: #e5e7eb; color: #374151; }
+    .card {
+      background: #fff; border-radius: 10px; box-shadow: 0 1px 3px rgba(0,0,0,.08);
+      padding: 1.25rem 1.5rem; margin-bottom: 0.75rem;
+      display: flex; align-items: flex-start; gap: 1rem;
+    }
+    .card.done { opacity: 0.55; }
+    .card.done .todo-title { text-decoration: line-through; }
+    .todo-title { font-size: 1rem; font-weight: 600; }
+    .todo-desc  { font-size: 0.875rem; color: #6b7280; margin-top: 0.2rem; }
+    .todo-meta  { font-size: 0.75rem; color: #9ca3af; margin-top: 0.3rem; }
+    .actions    { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+    .form-group { margin-bottom: 1rem; }
+    label { display: block; font-size: 0.875rem; font-weight: 500; margin-bottom: 0.3rem; }
+    input[type="text"], textarea {
+      width: 100%; padding: 0.5rem 0.75rem; border: 1px solid #d1d5db;
+      border-radius: 6px; font-size: 0.95rem; outline: none;
+    }
+    input[type="text"]:focus, textarea:focus { border-color: #2563eb; box-shadow: 0 0 0 3px rgba(37,99,235,.15); }
+    textarea { resize: vertical; min-height: 80px; }
+    .checkbox-row { display: flex; align-items: center; gap: 0.5rem; }
+    .checkbox-row input { width: auto; }
+    .form-actions { display: flex; gap: 0.5rem; margin-top: 1.25rem; }
+    .empty { text-align: center; color: #9ca3af; padding: 3rem 0; font-size: 1rem; }
+    .badge { font-size: 0.7rem; padding: 0.15rem 0.5rem; border-radius: 9999px; font-weight: 600; }
+    .badge-done { background: #d1fae5; color: #065f46; }
+    .badge-pending { background: #fef3c7; color: #92400e; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    {% block content %}{% endblock %}
+  </div>
+</body>
+</html>

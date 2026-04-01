@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: django-todo-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: django-todo-app
+  template:
+    metadata:
+      labels:
+        app: django-todo-app
+    spec:
+      containers:
+      - name: django-todo-container
+        image: sandeep2862/django-todo:1
+        ports:
+        - containerPort: 8000
+        env:
+        - name: SECRET_KEY
+          value: "your-secret-key"
+        - name: DB_NAME
+          value: "tododb"
+        - name: DB_USER
+          value: "todouser"
+        - name: DB_PASSWORD
+          value: "todopass"
+        - name: DB_HOST
+          value: "mysql-service"
+        - name: DB_PORT
+          value: "3306"

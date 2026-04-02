@@ -101,6 +101,7 @@ pipeline {
     post {
         always {
             sh 'docker-compose down -v || true'
+            sh 'docker image prune -f || true'
         }
     }
 }

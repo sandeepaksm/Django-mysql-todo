@@ -17,13 +17,25 @@ spec:
         image: mysql:8
         env:
         - name: MYSQL_DATABASE
-          value: "tododb"
+          valueFrom:
+            secretKeyRef:
+              name: django-mysql-secret
+              key: DB_NAME
         - name: MYSQL_USER
-          value: "todouser"
+          valueFrom:
+            secretKeyRef:
+              name: django-mysql-secret
+              key: DB_USER
         - name: MYSQL_PASSWORD
-          value: "todopass"
+          valueFrom:
+            secretKeyRef:
+              name: django-mysql-secret
+              key: DB_PASSWORD
         - name: MYSQL_ROOT_PASSWORD
-          value: "rootpass"
+          valueFrom:
+            secretKeyRef:
+              name: django-mysql-secret
+              key: DB_ROOT_PASSWORD
         ports:
         - containerPort: 3306
         volumeMounts:

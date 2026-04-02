@@ -14,18 +14,30 @@ spec:
     spec:
       containers:
       - name: django-todo-container
-        image: sandeep2862/django-todo:12
+        image: sandeep2862/django-todo:1
         ports:
         - containerPort: 8000
         env:
         - name: SECRET_KEY
-          value: "your-secret-key"
+          valueFrom:
+            secretKeyRef:
+              name: django-mysql-secret
+              key: SECRET_KEY
         - name: DB_NAME
-          value: "tododb"
+          valueFrom:
+            secretKeyRef:
+              name: django-mysql-secret
+              key: DB_NAME
         - name: DB_USER
-          value: "todouser"
+          valueFrom:
+            secretKeyRef:
+              name: django-mysql-secret
+              key: DB_USER
         - name: DB_PASSWORD
-          value: "todopass"
+          valueFrom:
+            secretKeyRef:
+              name: django-mysql-secret
+              key: DB_PASSWORD
         - name: DB_HOST
           value: "mysql-service"
         - name: DB_PORT

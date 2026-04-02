@@ -22,6 +22,19 @@ pipeline {
                     url: 'https://github.com/sandeepaksm/Django-mysql-todo.git'
             }
         }
+        stage('SonarQube Analysis') {
+            steps {
+                withCredentials([string(credentialsId: 'SONAR_AUTH_TOKEN', variable: 'SONAR_TOKEN')]) {
+                    sh """
+                        /opt/sonar-scanner/bin/sonar-scanner \
+                            -Dsonar.projectKey=django-todo \
+                            -Dsonar.sources=. \
+                            -Dsonar.host.url=http://3.107.37.16:9000 \
+                            -Dsonar.login=${SONAR_TOKEN}
+                    """
+                }
+            }
+        }
         stage('Build Docker Image') {
             steps {
                 sh "docker build --no-cache -t ${DOCKER_IMAGE}:${DOCKER_TAG} ."

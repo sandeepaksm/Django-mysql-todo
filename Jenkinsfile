@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent { label 'Jenkins_Agent' }
     environment {
         DOCKER_IMAGE = "sandeep2862/django-todo"
         DOCKER_TAG = "${BUILD_NUMBER}"
@@ -29,7 +29,7 @@ pipeline {
                         /opt/sonar-scanner/bin/sonar-scanner \
                             -Dsonar.projectKey=django-todo \
                             -Dsonar.sources=. \
-                            -Dsonar.host.url=http://3.107.37.16:9000 \
+                            -Dsonar.host.url=http://3.26.165.35:9000 \
                             -Dsonar.login=${SONAR_TOKEN}
                     """
                 }

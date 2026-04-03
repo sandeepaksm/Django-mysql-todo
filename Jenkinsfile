@@ -45,7 +45,7 @@ pipeline {
                 sh """
                     docker-compose -f docker-compose.yml up -d db
                     sleep 20
-                    docker exec django-todo-pipeline01-db-1 mysql -uroot -prootpass -e "GRANT ALL PRIVILEGES ON *.* TO 'todouser'@'%'; FLUSH PRIVILEGES;"
+                    docker exec django-todo-pipeline_db_1 mysql -uroot -prootpass -e "GRANT ALL PRIVILEGES ON *.* TO 'todouser'@'%'; FLUSH PRIVILEGES;"
                     docker run --rm \
                         --network django-todo-pipeline01_default \
                         -e DB_NAME=tododb \

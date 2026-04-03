@@ -51,7 +51,7 @@ pipeline {
                         -e DB_NAME=tododb \
                         -e DB_USER=todouser \
                         -e DB_PASSWORD=todopass \
-                        -e DB_HOST=django-todo-pipeline-db_1 \
+                        -e DB_HOST=django-todo-pipeline_db_1 \
                         -e DB_PORT=3306 \
                         -e SECRET_KEY=your-secret-key \
                         ${DOCKER_IMAGE}:${DOCKER_TAG} python manage.py test
